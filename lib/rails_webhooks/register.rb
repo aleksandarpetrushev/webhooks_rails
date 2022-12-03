@@ -5,13 +5,10 @@ module RailsWebhooks
     end
 
     module ClassMethods
-      def register_webhooks(events, **opts)
-        events ||= %i[create update destroy]
-        @@registered_webhooks_events = events
-      end
+      def register_webhooks(*events, **opts)
+        return unless events.present?
 
-      def registered_events
-        @@registered_webhooks_events
+        RailsWebhooks.add_events(class_name: self.to_s, events: events)
       end
     end
   end
