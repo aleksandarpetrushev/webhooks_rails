@@ -14,9 +14,9 @@ class CreateWebhooksTables < ActiveRecord::Migration[7.0]
     end
 
     create_table :rails_webhooks_events do |t|
-      t.belongs_to :subscriber, foreign_key: true, null: false, index: true
+      t.integer :subscriber_id, foreign_key: true, null: false, index: true
       t.string :name, null: false
-      t.text :payload, null: false
+      t.text :payload, null: true
 
       t.timestamps
     end
