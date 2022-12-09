@@ -25,4 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", ">= 7.0.3.1"
   spec.add_dependency "puma"
   spec.add_dependency "pg", "~> 1.1"
+
+  spec.add_development_dependency "dotenv-rails"
 end
