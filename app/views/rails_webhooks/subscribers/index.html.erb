@@ -13,11 +13,11 @@
   </tr>
   <% @subscribers.each do |subscriber| %>
     <tr>
-      <td><a href="<%= subscriber.url %>" target="_blank" rel="noopener noreferrer" ><%= subscriber.url %></a></td>
+      <td><a href="<%= subscriber_path(subscriber) %>" target="_blank" rel="noopener noreferrer" ><%= subscriber.url %></a></td>
       <td><%= subscriber.active? %></td>
-      <td><%= subscriber.subscriptions.join(',') %></td>
+      <td><%= subscriber.subscriptions&.join(',') %></td>
       <td>
-        <%= link_to image_tag('rails_webhooks/delete.png'), subscriber_path(subscriber), method: :delete, class: 'icon', confirm: "Are you sure?", disable_with: "Processing..." %>
+        <%= link_to image_tag('rails_webhooks/delete.png'), subscriber_path(subscriber), data: {:confirm => 'Are you sure?'}, method: :delete, class: 'icon' %>
       </td>
     </tr>
   <% end %>
