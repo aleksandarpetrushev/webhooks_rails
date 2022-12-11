@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_174256) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_174457) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "rails_webhooks_events", force: :cascade do |t|
     t.integer "subscriber_id", null: false
     t.string "name", null: false
-    t.text "payload", null: false
+    t.text "payload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subscriber_id"], name: "index_rails_webhooks_events_on_subscriber_id"

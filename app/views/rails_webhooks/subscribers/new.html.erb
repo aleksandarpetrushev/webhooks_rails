@@ -1,0 +1,10 @@
+<h1>New subscriber</h1>
+
+<%= form_for @subscriber, url: subscribers_path, method: :post do |form| %>
+  <%= render "form", subscriber: @subscriber, form: form %>
+<% end %>
+<br>
+
+<div>
+  <%= link_to "Back to subscribers", subscribers_path %>
+</div>

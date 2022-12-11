@@ -1,0 +1,24 @@
+<h1>Webhooks Subscribers</h1>
+
+<div id="button-container">
+  <button><a href="<%= new_subscriber_path %>">Add new Subscriber</a></button>
+</div>
+
+<table id="customers">
+  <tr>
+    <th>URL</th>
+    <th>Active</th>
+    <th>Subscriptions</th>
+    <th>Actions</th>
+  </tr>
+  <% @subscribers.each do |subscriber| %>
+    <tr>
+      <td><a href="<%= subscriber_path(subscriber) %>" target="_blank" rel="noopener noreferrer" ><%= subscriber.url %></a></td>
+      <td><%= subscriber.active? %></td>
+      <td><%= subscriber.subscriptions&.join(',') %></td>
+      <td>
+        <%= link_to image_tag('rails_webhooks/delete.png'), subscriber_path(subscriber), data: {:confirm => 'Are you sure?'}, method: :delete, class: 'icon' %>
+      </td>
+    </tr>
+  <% end %>
+</table>
