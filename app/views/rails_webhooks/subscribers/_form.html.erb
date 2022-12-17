@@ -22,7 +22,19 @@
   </div>
 
   <div>
+    <% RailsWebhooks.get_events.each do |events_hash| %>
+       <% class_name = events_hash[:class_name] %>
+       <% events = events_hash[:events] %>
+        <%= label_tag "subscriptions[#{class_name}]", class_name %>
+        <%= check_box_tag "subscriptions[#{class_name}]", true, false %>
 
+        <% events.each do |event| %>
+          <% event_name = "#{class_name}.#{event}" %>
+          <%= label_tag "subscriptions[#{event_name}]", event %>
+          <%= check_box_tag "subscriptions[#{event_name}]", true, false, multiple: true %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <%= form.submit %>

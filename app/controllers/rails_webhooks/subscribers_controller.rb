@@ -1,6 +1,7 @@
 module RailsWebhooks
   class SubscribersController < ApplicationController
     before_action :set_subscriber, only: %i[ show edit update destroy ]
+    before_action :set_subscriptions, only: %i[create update]
 
     # GET /subscribers
     def index
@@ -54,7 +55,14 @@ module RailsWebhooks
 
       # Only allow a list of trusted parameters through.
       def subscriber_params
-        params.require(:subscriber).permit(:url, :active, :subscriptions)
+        params.require(:subscriber).permit(:url, :active, subscriptions: [])
       end
+
+    def set_subscriptions
+      params[:subscriber][:subscriptions] = params[:subscriptions].select { |_event, value| value == 'true' }.keys
+      params[:subscriber][:subscriptions] = params[:subscriber][:subscriptions].flat_map do |subscription|
+        subscription.include?('.') ? subscription : RailsWebhooks.get_events_for(subscription).map { |event| "#{subscription}.#{event}" }
+      end
+    end
   end
 end

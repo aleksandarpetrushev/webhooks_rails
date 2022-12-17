@@ -15,7 +15,7 @@
     <tr>
       <td><a href="<%= subscriber_path(subscriber) %>" target="_blank" rel="noopener noreferrer" ><%= subscriber.url %></a></td>
       <td><%= subscriber.active? %></td>
-      <td><%= subscriber.subscriptions&.join(',') %></td>
+      <td><%= subscriber.subscriptions&.join(', ') %></td>
       <td>
         <%= link_to image_tag('rails_webhooks/delete.png'), subscriber_path(subscriber), data: {:confirm => 'Are you sure?'}, method: :delete, class: 'icon' %>
       </td>

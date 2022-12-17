@@ -8,7 +8,8 @@ module RailsWebhooks
       def register_webhooks(*events, **opts)
         return unless events.present?
 
-        RailsWebhooks.add_events(class_name: self.to_s, events: events)
+        class_name = opts[:class_name] || self.to_s.demodulize.underscore
+        RailsWebhooks.add_events(class_name: class_name, events: events)
       end
     end
   end
